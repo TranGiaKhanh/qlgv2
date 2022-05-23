@@ -6,13 +6,13 @@
     <div class="col-lg-12 grid-margin stretch-card background-color-grey">
         <div class="card">
             <div class="card-body">
-                {{-- <div class="form-group">
-                        <form method="post" action="{{route('importSchedules')}}" enctype="multipart/form-data">
+                 <div class="form-group">
+                        <form method="post" action="{{route('schedules.importSchedule')}}" enctype="multipart/form-data">
                             @csrf
                             <input type="file" name="file">
                             <button type="submit" class="btn btn-primary">Add</button>
                         </form>
-                    </div> --}}
+                    </div>
                 <h4 class="card-title">Thời khóa biểu</h4>
                 <p class="card-description">
                 </p>
@@ -43,7 +43,7 @@
                                         {{ $key + 1 }}
                                     </td>
                                     <td>
-                                        {{ $schedule->class }}
+                                        {{ $schedule->class->name }}
                                     </td>
                                     <td>
                                         {{ $schedule->date }}
@@ -55,7 +55,7 @@
                                         {{ $schedule->value }}
                                     </td>
                                     <td>
-                                        {{ $schedule->user}}
+                                        {{ $schedule->user->name }}
                                     </td>
                                     </td>
                                     @can(config('const.ROLE.ADMIN'))

@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="ml-auto p-2 d-flex flex-row">
                                         <input class="form-control" id="navbar-search-input" name="keyword"
-                                            placeholder="Search" aria-label="search" aria-describedby="search">
+                                            placeholder="Search" aria-label="search" aria-describedby="search" value="{{ $keyword }}">
                                         <button type="button" class="btn btn-primary filterButton">
                                             <i class="ti-search text-white"></i>
                                         </button>

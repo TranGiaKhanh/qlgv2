@@ -16,4 +16,19 @@ class ClassesRepository extends BaseRepository implements ClassesRepositoryInter
     {
         return $this->model->paginate(50);
     }
+
+    public function getAllFilter($data)
+    {
+        $query = $this->model;
+        if(isset($data['department_id']))
+        {
+            $query = $query->where('department_id', $data['department_id']);
+        }
+        if(isset($data['keyword']))
+        {
+            $query = $query->where('name', 'like', '%' . $data['keyword'] . '%');
+        }
+   
+        return $query->paginate(10);
+    }
 }

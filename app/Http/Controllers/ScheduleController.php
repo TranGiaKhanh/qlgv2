@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Imports\ScheduleImport;
 use App\Models\Schedule;
-use App\Http\Requests\ScheduleRequest;
-use Maatwebsite\Excel\Excel;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\Schedule\ScheduleRepositoryInterface;
@@ -27,9 +26,9 @@ class ScheduleController extends Controller
     }
     public function tkb(Request $request)
     {
-        $classes = $this -> classes->getAll();
-        $users = $this -> user -> getAll();
-        $schedules = $this->schedule->getAllSchedules();
+        $classes = $this->classes->getAll();
+        $users = $this->user->getAll();
+        $schedules = Schedule::where('teacher', $request->user()->id)->paginate(10);
         return view('schedules.tkb', compact('schedules','classes','users'));
     }
     public function import()
@@ -38,9 +37,8 @@ class ScheduleController extends Controller
     }
     public function importSchedule(Request $request)
     {
-        dd($request->all());
-        // Excel::import(new ScheduleImport, request()->file('file'));
-        // return redirect()->route('schedules.index')->with('success');
+        Excel::import(new ScheduleImport, $request->file('file'));
+         return redirect()->route('schedules.index')->with('success');
     }
     public function destroy($id)
     {

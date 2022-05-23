@@ -9,13 +9,13 @@ class Schedule extends Model
 {
     use HasFactory;
     protected $table = 'schedules';
-    protected $fillable = [ 'class_id', 'date', 'lesson', 'value', 'user_id'];
-    public function classes()
+    protected $guarded = [];
+    public function class()
     {
-        return $this->hasMany(Classes::class, "id");
+        return $this->belongsTo(Classes::class);
     }
     public function user()
     {
-        return $this->hasMany(User::class,  'id');
+        return $this->belongsTo(User::class,  'teacher','id');
     }
 }

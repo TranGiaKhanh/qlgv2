@@ -8,7 +8,7 @@
 
                 </a>
                 <div class="collapse" id="form-elements">
-                    <ul class="nav flex-column sub-menu">
+                    <ul class="nav flex-column sub-menu sub-menu-radious">
                         <li class="nav-item"><a class="nav-link" href="{{ route('users.index') }}">Danh sách </a></li>
                         @can(config('const.ROLE.ADMIN'))
                         <li class="nav-item"><a class="nav-link" href="{{ route('users.create') }}">Thêm giảng viên</a></li>
@@ -24,7 +24,7 @@
 
                 </a>
                 <div class="collapse" id="ui-basic">
-                    <ul class="nav flex-column sub-menu">
+                    <ul class="nav flex-column sub-menu sub-menu-radious">
                         <li class="nav-item"> <a class="nav-link" href="{{ route('departments.index') }}">Danh sách khoa</a></li>
                         @can(config('const.ROLE.ADMIN'))
                         <li class="nav-item"> <a class="nav-link" href="{{route('departments.create')}}">Thêm khoa</a></li>
@@ -39,7 +39,7 @@
                     <span class="menu-title">Lớp</span>
                 </a>
                 <div class="collapse" id="ui">
-                    <ul class="nav flex-column sub-menu">
+                    <ul class="nav flex-column sub-menu sub-menu-radious-radious sub-menu sub-menu-radious-radious">
                         <li class="nav-item"> <a class="nav-link" href="{{route('classes.index') }}">Danh sách lớp</a></li>
                         @can(config('const.ROLE.ADMIN'))
                         <li class="nav-item"> <a class="nav-link" href="{{route('classes.create')}}">Thêm lớp</a></li>
@@ -57,11 +57,11 @@
                 </a>
                 <div class="collapse" id="ui-2">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{route('schedules.index') }}">Thời khóa biểu</a></li>
                         @can(config('const.ROLE.ADMIN'))
-                        <li class="nav-item"> <a class="nav-link" href="{{route('schedules.import') }}">Thêm</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{route('schedules.tkb') }}">Lịch dạy</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('schedules.index') }}">Thời khóa biểu</a></li>
+{{--                        <li class="nav-item"> <a class="nav-link" href="{{route('schedules.import') }}">Thêm</a></li>--}}
                         @endcan
+                        <li class="nav-item"> <a class="nav-link" href="{{route('schedules.tkb') }}">Lịch dạy</a></li>
                     </ul>
                 </div>
             </li>

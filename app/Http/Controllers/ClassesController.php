@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Classes\ClassesRepository;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Excel;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,7 @@ use App\Repositories\Classes\ClassesRepositoryInterface;
 
 class ClassesController extends Controller
 {
-    function __construct(ClassesRepositoryInterface $classes, DepartmentRepositoryInterface $department)
+    function __construct(ClassesRepository $classes, DepartmentRepositoryInterface $department)
     {
         $this->classes = $classes;
         $this->department = $department;
@@ -22,8 +23,9 @@ class ClassesController extends Controller
     public function index(Request $request)
     {
         $departments = $this->department->getAll();
-        $classes = $this->classes->getAllClasses();
-        return view('classes.list', compact('classes', 'departments'));
+        $classes = $this->classes->getAllFilter($request->all());
+        $keyword = $request->keyword;
+        return view('classes.list', compact('classes', 'departments', 'keyword'));
     }
 
     public function create()

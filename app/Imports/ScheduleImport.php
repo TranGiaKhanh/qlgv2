@@ -16,12 +16,12 @@ class ScheduleImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         return new Schedule([
-            'id' => $row[0],
-            'class' => $row[1],
-            'date' => $row[2],
-            'lesson' => $row[3],
-            'value' => $row[4],
-            'teacher' => $row[5]
+            'id' => $row['id'],
+            'class_id' => $row['class_id'],
+            'date' => $row['date'],
+            'lesson' => $row['lesson'],
+            'value' => $row['value'],
+            'teacher' => $row['teacher']
         ]);
     }
 }

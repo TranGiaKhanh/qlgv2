@@ -36,7 +36,7 @@
                                         {{ $key + 1 }}
                                     </td>
                                     <td>
-                                        {{ $schedule->classes->name }}
+                                        {{ $schedule->class->name }}
                                     </td>
                                     <td>
                                         {{ $schedule->date }}
@@ -48,7 +48,7 @@
                                         {{ $schedule->value }}
                                     </td>
                                     <td>
-                                        {{ $schedule->users->name}}
+                                        {{ $schedule->user->name}}
                                     </td>
                                     </td>
                                     @can(config('const.ROLE.ADMIN'))
