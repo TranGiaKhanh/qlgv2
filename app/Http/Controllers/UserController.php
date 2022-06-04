@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\UserExport;
+use App\Repositories\Education\EducationRepository;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Excel;
 use Illuminate\Support\Facades\Auth;
@@ -19,11 +20,12 @@ use App\Repositories\Department\DepartmentRepositoryInterface;
 
 class UserController extends Controller
 {
-    public function __construct(UserRepositoryInterface $user, DepartmentRepositoryInterface $department, RoleRepositoryInterface $role)
+    public function __construct(UserRepositoryInterface $user, DepartmentRepositoryInterface $department, RoleRepositoryInterface $role, EducationRepository $eduRepo)
     {
         $this->user = $user;
         $this->department = $department;
         $this->role = $role;
+        $this->eduRepo = $eduRepo;
     }
 
     public function index(Request $request)
@@ -127,6 +129,12 @@ class UserController extends Controller
         }
     }
 
+    public function show($id)
+    {
+        $user = $this->user->getById($id);
+        return view('pages.profile', compact('user'));
+    }
+
     public function showProfile()
     {
         $user = $this->user->getById(Auth::user()->id);
@@ -141,7 +149,8 @@ class UserController extends Controller
 
     public function updateProfile(UpdateProfileRequest $request, $id)
     {
-        $data = $request->except('_token');
+        //Update profile
+        $data = $request->only('name', 'address', 'birthday', 'phone');
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = $image->getClientOriginalName();
@@ -154,6 +163,11 @@ class UserController extends Controller
             }
         }
         $this->user->update($data, $id);
+
+        //Update education
+        $data = $request->only('ts', 'tp', 'disciplines', 'gy');
+        $this->eduRepo->update($data, $request->user()->education->id);
+
         return redirect()->route('profile')->with('success', 'Cập nhật thành công !');
     }
 

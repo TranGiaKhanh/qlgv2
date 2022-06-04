@@ -27,4 +27,19 @@ class User extends Authenticatable
     {
         return $this->hasOne(Role::class, 'id', 'role_id');
     }
+
+    public function education()
+    {
+        return $this->hasOne(Education::class);
+    }
+
+    public function afteredu()
+    {
+        return $this->hasOne(Afteredu::class);
+    }
+
+    public function workprocess()
+    {
+        return $this->hasMany(WorkProcess::class);
+    }
 }

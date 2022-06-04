@@ -79,7 +79,7 @@
                                         <img src="{{ asset('uploads/' . 'avatar.png') }}" alt="">
                                     @endif
                                 </td>
-                                <td>{{ $user->name }}</td>
+                                <td><a href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
                                 <td>{{ $user->phone }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->department->name }}</td>

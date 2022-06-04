@@ -1,13 +1,20 @@
 <?php
 
-namespace App\Repositories;
 
-use App\Repositories\Interfaces\EducationRepositoryInterface;
+namespace App\Repositories\Education;
 
-class EducationRepository implements EducationRepositoryInterface
+use App\Models\Classes;
+use App\Models\Education;
+use App\Repositories\BaseRepository\BaseRepository;
+
+class EducationRepository extends BaseRepository implements EducationRepositoryInterface
 {
-    public function __construct()
+    public function getModel()
     {
-        //
+        return Education::class;
+    }
+    public function getAllClasses()
+    {
+        return $this->model->paginate(50);
     }
 }

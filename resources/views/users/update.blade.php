@@ -4,7 +4,7 @@
     <div class="col-12 grid-margin">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Cập nhập</h4>
+                <h4 class="card-title">Cập nhật</h4>
                 @if (session()->has('error'))
                     <h6 class="alert alert-danger">
                         {{ session()->get('error') }}
