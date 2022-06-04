@@ -18,7 +18,7 @@ class CreateSchedulesTable extends Migration
             $table->string('class_id');
             $table->string('date');
             $table->string('location');
-            $talbe->string('time');
+            $table->string('time');
             $table->string('value');
             $table->string('teacher');
             $table->timestamps();
