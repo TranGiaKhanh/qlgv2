@@ -27,7 +27,8 @@
                             <th>No</th>
                             <th>Tên lớp</th>
                             <th>Thời gian</th>
-                            <th>Bài giảng</th>
+                            <th>Địa điểm</th>
+                            <th>Buổi</th>
                             <th>số tiết</th>
                             <th>Giảng viên</th>
                             @can(config('const.ROLE.ADMIN'))
@@ -49,7 +50,10 @@
                                         {{ $schedule->date }}
                                     </td>
                                     <td>
-                                        {{ $schedule->lesson}}
+                                        {{ $schedule->location}}
+                                    </td>
+                                    <td>
+                                        {{$schedule->time}}
                                     </td>
                                     <td>
                                         {{ $schedule->value }}

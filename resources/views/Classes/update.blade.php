@@ -7,9 +7,6 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Cập nhập</h4>
-                @foreach ($classes as $classes )
-
-                @endforeach
                 <form action="{{ route('classes.edit', $classes->id) }}" class="forms-sample" method="POST">
                     @csrf
                     <div class="form-group">

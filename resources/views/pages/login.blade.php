@@ -23,7 +23,7 @@
                             <!-- <div class="brand-logo">
                                 <img src="images/logo.svg" alt="logo">
                             </div> -->
-                            <h4>Hello!</h4>
+                            {{-- <h4>Hello!</h4> --}}
                             <h6 class="font-weight-light">Đăng nhập để tiếp tục.</h6>
                             @if(session()->has('error'))
                             <h6 class="alert alert-danger">
