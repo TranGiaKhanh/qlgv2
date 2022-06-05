@@ -1,24 +1,24 @@
 @extends('layouts.master')
-@section('title', 'Update User')
+@section('title', 'CHỉnh sửa thông tin')
 @section('content')
-    <div class="col-12 grid-margin">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Cập nhật</h4>
-                @if (session()->has('error'))
-                    <h6 class="alert alert-danger">
-                        {{ session()->get('error') }}
-                    </h6>
-                @endif
-                <form action="{{ route('users.update', $user->id) }}" class="form-sample" method="post"
-                    enctype="multipart/form-data">
-                    @method('PUT')
+    @if (session()->has('error'))
+        <h6 class="alert alert-danger">
+            {{ session()->get('error') }}
+        </h6>
+    @endif
+    <form action="{{ route('users.update', $user->id) }}" class="form-sample" method="post"
+        enctype="multipart/form-data">
+        @method('PUT')
+        <div class="col-12 grid-margin mb-5 pb-5">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Thông tin</h4>
                     @csrf
-                    <input type="hidden" name="id" value={{ $user->id }}>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Họ tên <span class="text-danger">*</span></label>
+                                <label class="col-sm-3 col-form-label">Họ và tên <span
+                                        class="text-danger">*</span></label>
                                 <div class="col-sm-9">
                                     <input type="text" name="name" class="form-control" value="{{ $user->name }}" />
                                     @error('name')
@@ -27,19 +27,19 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Email <span class="text-danger">*</span></label>
+                                <label class="col-sm-3 col-form-label">Email<span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="email" name="email" class="form-control" value="{{ $user->email }}" />
-                                    @error('email')
+                                    <input type="text" name="email" class="form-control" value="{{ $user->email }}" />
+                                    @error('birthday')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Số điện thoại</label>
@@ -63,8 +63,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Ngày sinh <span
@@ -78,6 +77,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label"> Giới tính <span
@@ -94,8 +94,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Khoa <span class="text-danger">*</span></label>
@@ -114,6 +113,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Chức vụ<span class="text-danger">*</span></label>
@@ -133,12 +133,207 @@
                             </div>
                         </div>
                     </div>
-
-                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                    <button type="button" onclick="window.location.href='{{ route('users.index') }}'"
-                        class="btn btn-light">Cancel</button>
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
+            <!-- End user info -->
+            <!-- Education -->
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h4 class="card-title">Học vấn đại học</h4>
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Hệ đào tạo <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="ts" class="form-control"
+                                        value="{{ $user->education->ts }}" />
+                                    @error('ts')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Nơi đào tạo <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="tp" class="form-control"
+                                        value="{{ $user->education->tp }}" />
+                                    @error('tp')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Ngành học <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="disciplines" class="form-control"
+                                        value="{{ $user->education->disciplines }}" />
+                                    @error('disciplines')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Năm tốt nghiệp <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="gy" class="form-control"
+                                        value="{{ $user->education->gy }}" />
+                                    @error('gy')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End education -->
+            <!-- Afteredu -->
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h4 class="card-title">Học vấn sau đại học</h4>
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Bằng thạc sĩ chuyên ngành</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="st_1" class="form-control"
+                                        value="{{ $user->education->st_1 }}" />
+                                    @error('st_!')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Bằng tiến sĩ chuyên ngành</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="st_2" class="form-control"
+                                        value="{{ $user->education->st_2 }}" />
+                                    @error('st_2')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Nơi đào tạo </label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="tp_1" class="form-control"
+                                        value="{{ $user->education->tp_1 }}" />
+                                    @error('tp_1')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Nơi đào tạo</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="tp_2" class="form-control"
+                                        value="{{ $user->education->tp_2 }}" />
+                                    @error('tp_2')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Năm cấp bằng</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="gy_1" class="form-control"
+                                        value="{{ $user->education->gy_1 }}" />
+                                    @error('gy_1')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Năm cấp bằng</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="gy_2" class="form-control"
+                                        value="{{ $user->education->gy_2 }}" />
+                                    @error('gy_2')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Afteredu -->
+            <!-- workprocess -->
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h4 class="card-title">Quá trình công tác</h4>
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Thời gian</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="time" class="form-control"
+                                        value="{{ $user->education->time }}" />
+                                    @error('time')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Nơi công tác</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="location" class="form-control"
+                                        value="{{ $user->education->location }}" />
+                                    @error('location')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Công việc </label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="job" class="form-control"
+                                        value="{{ $user->education->job }}" />
+                                    @error('job')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mr-2">Cập nhật</button>
+            <button type="button" onclick="window.location.href='{{ route('users.index') }}'"
+                class="btn btn-light">Hủy</button>
+    </form>
 @endsection

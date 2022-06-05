@@ -34,9 +34,9 @@
                             <label class="form-check-label" for="inlineRadiostatus">Tạm ngưng</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button type="submit" class="btn btn-primary mr-2">Thêm khoa</button>
                     <button type="button" onclick="window.location.href='{{ route('departments.index') }}'"
-                        class="btn btn-light">Cancel</button>
+                        class="btn btn-light">Hủy </button>
                 </form>
             </div>
         </div>

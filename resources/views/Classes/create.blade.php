@@ -25,9 +25,9 @@
                             @endforeach
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary mr-2">Thêm</button>
+                    <button type="submit" class="btn btn-primary mr-2">Thêm lớp</button>
                     <button type="button" onclick="window.location.href='{{ route('classes.index') }}'"
-                        class="btn btn-light">hủy bỏ</button>
+                        class="btn btn-light">Hủy </button>
                 </form>
             </div>
         </div>

@@ -1,12 +1,12 @@
 @extends('layouts.master')
 @section('title')
-    Danh sách khoa
+    Sửa khoa
 @endsection
 @section('content')
     <div class="col-12 grid-margin">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Cập nhập</h4>
+                <h4 class="card-title">Cập nhật</h4>
                 <form action="{{ route('departments.suakhoa', $departments->id) }}" class="forms-sample" method="POST">
                     @csrf
                     <div class="form-group">
@@ -34,9 +34,9 @@
                             <label class="form-check-label" for="inlineRadiostatus">Tạm ngưng</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button type="submit" class="btn btn-primary mr-2">Cập nhật</button>
                     <button type="button" onclick="window.location.href='{{ route('departments.index') }}'"
-                        class="btn btn-light">Cancel</button>
+                        class="btn btn-light">Hủy</button>
                 </form>
             </div>
         </div>

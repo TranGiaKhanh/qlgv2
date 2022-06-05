@@ -6,7 +6,7 @@
     <div class="col-lg-12 grid-margin stretch-card background-color-grey">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Thời khóa biểu</h4>
+                <h4 class="card-title">Lịch dạy</h4>
                 <p class="card-description">
                 </p>
                 @if (session()->has('success'))
@@ -24,9 +24,6 @@
                             <th>Buổi</th>
                             <th>số tiết</th>
                             <th>Giảng viên</th>
-                            @can(config('const.ROLE.ADMIN'))
-                            <th>Action</th>
-                            @endcan
                         </tr>
                     </thead>
                     <tbody>
@@ -55,19 +52,6 @@
                                         {{ $schedule->user->name }}
                                     </td>
                                     </td>
-                                    @can(config('const.ROLE.ADMIN'))
-                                    <td>
-                                        <a class="btn btn-danger" href="#" data-toggle="modal"
-                                            data-target="#ModalDelete{{ $schedule->id }}">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </a>
-                                        <form id="delete_form_{{ $schedule->id }}" method="get"
-                                            action="{{ route('schedules.delete', $schedule->id) }}"
-                                            style="display:none">
-                                            @csrf
-                                        </form>
-                                    </td>
-                                    @endcan
                                     @include('modals.delete-schedules')
                                 </tr>
                             @endforeach

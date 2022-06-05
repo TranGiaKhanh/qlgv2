@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Login</title>
+    <title>Đăng nhập</title>
     <base href="{{ asset('') }}template/">
     @section('css')
         <link rel="stylesheet" href="vendors/feather/feather.css">
@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="mt-3">
                                     <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
-                                        SIGN IN
+                                        ĐĂNG NHẬP
                                     </button>
                                 </div>
                             </form>

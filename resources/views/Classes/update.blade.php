@@ -1,12 +1,12 @@
 @extends('layouts.master')
 @section('title')
-    Danh sách Lớp
+    Sửa lớp
 @endsection
 @section('content')
     <div class="col-12 grid-margin">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Cập nhập</h4>
+                <h4 class="card-title">Cập nhật</h4>
                 <form action="{{ route('classes.edit', $classes->id) }}" class="forms-sample" method="POST">
                     @csrf
                     <div class="form-group">
@@ -25,9 +25,9 @@
                                 @endforeach
                             </select>
                     </div>
-                    <button type="submit" class="btn btn-primary mr-2">Cập nhập</button>
+                    <button type="submit" class="btn btn-primary mr-2">Cập nhật</button>
                     <button type="button" onclick="window.location.href='{{ route('classes.index') }}'"
-                        class="btn btn-light">Hủy bỏ</button>
+                        class="btn btn-light">Hủy </button>
                 </form>
             </div>
         </div>

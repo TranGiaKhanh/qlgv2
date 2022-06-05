@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Repositories\Afteredu;
+
+namespace App\Repositories\WorkProcess;
 
 use App\Models\Classes;
-use App\Models\Afteredu;
+use App\Models\WorkProcess;
 use App\Repositories\BaseRepository\BaseRepository;
 
-class AftereduRepository extends BaseRepository implements AftereduRepositoryInterface
+class WorkProcessRepository extends BaseRepository implements WorkProcessRepositoryInterface
 {
     public function getModel()
     {
-        return Afteredu::class;
+        return WorkProcess::class;
     }
     public function getAllClasses()
     {

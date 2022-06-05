@@ -10,7 +10,7 @@
                         <form method="post" action="{{route('schedules.importSchedule')}}" enctype="multipart/form-data">
                             @csrf
                             <input type="file" name="file">
-                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button type="submit" class="btn btn-primary">Thêm mới</button>
                         </form>
                     </div>
                 <h4 class="card-title">Thời khóa biểu</h4>

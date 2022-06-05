@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Profile')
+@section('title', 'Thông tin')
 @section('content')
     <div class="container-fluid mt-2 mb-5 pb-5">
         @if (session()->has('success'))
@@ -40,14 +40,13 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-8 col-xlg-9 col-md-7">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-12"><b>Họ và tên</b></label>
+                                    <label class="col-md-12"><b>Họ và tên:</b></label>
                                     <div class="col-md-12">
                                         <span>{{ $user->name }}</span>
                                     </div>
@@ -55,7 +54,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="example-email" class="col-md-12"><b>Giới tính</b></label>
+                                    <label for="example-email" class="col-md-12"><b>Giới tính:</b></label>
                                     <div class="col-md-12">
                                         <span>{{ $user->gender }}</span>
                                     </div>
@@ -114,7 +113,7 @@
             </div>
 
             <div class="mt-5 col-lg-4 col-xlg-3 col-md-5">
-                    <h3 class="text-themecolor">Học vấn</h3>
+                    <h3 class="text-themecolor">Học vấn đại học</h3>
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
@@ -164,7 +163,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="col-md-12"><b>Bằng thạc sĩ : </b></label>
+                                        <label class="col-md-12"><b>Bằng thạc sĩ chuyên ngành: </b></label>
                                         <div class="col-md-12">
                                             <span>{{ $user->afteredu->st_1 ?? __('admin.null_data') }}</span>
                                         </div>
@@ -191,7 +190,7 @@
                             <div class="row mt-5">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="col-md-12"><b>Bằng tiến sĩ : </b></label>
+                                        <label class="col-md-12"><b>Bằng tiến sĩ chuyên ngành : </b></label>
                                         <div class="col-md-12">
                                             <span>{{ $user->afteredu->st_2 ?? __('admin.null_data') }}</span>
                                         </div>
@@ -219,7 +218,7 @@
                 </div>
 
             <div class="mt-5 col-12">
-                <h3 class="text-themecolor">Học vấn</h3>
+                <h3 class="text-themecolor">Quá trình công tác</h3>
                 <div class="row">
                    <table class="w-100 table">
                        <thead>

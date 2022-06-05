@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Exports\UserExport;
 use App\Repositories\Education\EducationRepository;
+use App\Repositories\Afteredu\AftereduRepository;
+use App\Repositories\WorkProcess\WorkProcessRepository;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Excel;
 use Illuminate\Support\Facades\Auth;
@@ -20,12 +22,16 @@ use App\Repositories\Department\DepartmentRepositoryInterface;
 
 class UserController extends Controller
 {
-    public function __construct(UserRepositoryInterface $user, DepartmentRepositoryInterface $department, RoleRepositoryInterface $role, EducationRepository $eduRepo)
+    public function __construct(UserRepositoryInterface $user, DepartmentRepositoryInterface $department,
+    RoleRepositoryInterface $role, EducationRepository $eduRepo,
+    AftereduRepository $afteduRepo, WorkProcessRepository $work)
     {
         $this->user = $user;
         $this->department = $department;
         $this->role = $role;
         $this->eduRepo = $eduRepo;
+        $this->afteduRepo = $afteduRepo;
+        $this->work = $work;
     }
 
     public function index(Request $request)
@@ -73,7 +79,11 @@ class UserController extends Controller
                 Storage::delete('images/' . $request->old_image);
             }
         }
+
         $data['first_login'] = config('const.FIRSTLOGIN');
+        $this->eduRepo->store($data);
+        $this->afteduRepo->store($date);
+        $this->work->store($date);
         $this->user->store($data);
         return redirect()->route('users.index')->with('success', 'Thêm mới thành công !');
     }
@@ -107,11 +117,13 @@ class UserController extends Controller
                 Storage::delete('images/' . $request->old_image);
             }
         }
-        $checkManager = $this->user->findManager($data['department_id']);
-        if (isset($checkManager) && $data['role_id'] == config('const.ROLE_MANAGER') && $checkManager->id != $id) {
-            return redirect()->back()->with('error', 'Phòng này đã có trưởng khoa !');
-        }
         $this->user->update($data, $id);
+        $data = $request->only('ts', 'tp', 'disciplines', 'gy');
+        $this->eduRepo->update($data, $request->user()->education->id);
+        $data = $request->only('st_1', 'tp_1', 'gy_1', 'st_2', 'tp_2', 'gy_2');
+        $this->afteduRepo->update($data, $request->user()->afteredu->id);
+        $data = $request->only('time', 'location', 'job');
+
         return redirect()->route('users.index')->with('success', 'Cập nhật thành công !');
     }
 
@@ -167,7 +179,10 @@ class UserController extends Controller
         //Update education
         $data = $request->only('ts', 'tp', 'disciplines', 'gy');
         $this->eduRepo->update($data, $request->user()->education->id);
-
+        $data = $request->only('st_1', 'tp_1', 'gy_1', 'st_2', 'tp_2', 'gy_2');
+        $this->afteduRepo->update($data, $request->user()->afteredu->id);
+        $data = $request->only('time', 'location', 'job');
+        $this->work->update($data, $request->user()->workprocess->id);
         return redirect()->route('profile')->with('success', 'Cập nhật thành công !');
     }
 

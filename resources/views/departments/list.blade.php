@@ -24,7 +24,7 @@
                             <th>Create at</th>
                             <th>Update at</th>
                             @can(config('const.ROLE.ADMIN'))
-                            <th>Action</th>
+                            <th></th>
                             @endcan
                         </tr>
                     </thead>

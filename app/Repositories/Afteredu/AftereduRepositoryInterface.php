@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Repositories\Interfaces;
+namespace App\Repositories\Afteredu;
 
-interface AftereduRepositoryInterface
+use App\Repositories\BaseRepository\BaseRepositoryInterface;
+
+interface AftereduRepositoryInterface extends BaseRepositoryInterface
 {
-    
+    public function getAllClasses();
 }

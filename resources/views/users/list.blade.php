@@ -59,12 +59,12 @@
                         <tr>
                             <th>No</th>
                             <th>Ảnh</th>
-                            <th>Họ tên</th>
+                            <th>Họ và tên</th>
                             <th>Email</th>
                             <th>Khoa giảng dạy</th>
                             <th>Chức vụ</th>
                             @can(config('const.ROLE.ADMIN'))
-                                <th colspan="2">Action</th>
+                                <th colspan="2"></th>
                             @endcan
                         </tr>
                     </thead>
@@ -93,10 +93,10 @@
                                             data-target="#modal-delete{{ $user->id }}">
                                             <i class="ti-trash text-white" aria-hidden="true"></i>
                                         </a>
-                                        <a class="btn btn-danger" href="#" data-toggle="modal"
+                                        {{-- <a class="btn btn-danger" href="#" data-toggle="modal"
                                             data-target="#modal-reset{{ $user->id }}">
                                             <i class="ti-reload text-white" aria-hidden="true"></i>
-                                        </a>
+                                        </a> --}}
                                         <form id="delete_form_{{ $user->id }}" method="post"
                                             action="{{ route('users.destroy', $user->id) }}" style="display:none">
                                             @method('DELETE')
