@@ -23,8 +23,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
-
-        $id = app('request')->get('id');
+        $id = $this->route('user');
         return [
             'name' => 'required|min:3|max:30',
             'email' => ['required','email','max:255','unique:users,email,'.$id],

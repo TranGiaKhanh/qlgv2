@@ -12,7 +12,7 @@
                 <h3 class="text-themecolor">Lý lịch sơ lược</h3>
             </div>
             <div class="col-2">
-                <a href="{{ route('profiles.showFormUpdateProfile', $user->id) }}"
+                <a href="{{ route('users.edit', $user->id) }}"
                    class="btn btn-primary">
                     <i class="ti-marker-alt text-white"></i>
                 </a>

@@ -32,8 +32,9 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Email<span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="email" class="form-control" value="{{ $user->email }}" />
-                                    @error('birthday')
+                                    <input type="hidden" name="email" class="form-control" value="{{ $user->email }}" />
+                                    <input type="text" name="emailOld" class="form-control" value="{{ $user->email }}" disabled/>
+                                    @error('email')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -85,8 +86,8 @@
                                 <div class="col-sm-9">
                                     <select class="form-control" name="gender">
                                         <option>--Chọn Giới tính--</option>
-                                        <option value="Nam">Nam</option>
-                                        <option value="Nữ">Nữ</option>
+                                        <option value="Nam"  {{ $user->gender == 'Nam' ? 'selected' : ''}}>Nam</option>
+                                        <option value="Nữ"  {{  $user->gender == 'Nữ' ? 'selected' : '' }}>Nữ</option>
                                     </select>
                                     @error('department_id')
                                         <p class="text-danger">{{ $message }}</p>
@@ -208,11 +209,11 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label"> Bằng thạc sĩ chuyên ngành</label>
+                                <label class="col-sm-3 col-form-label">Bằng thạc sĩ chuyên ngành</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="st_1" class="form-control"
-                                        value="{{ $user->education->st_1 }}" />
-                                    @error('st_!')
+                                        value="{{ $user->afteredu->st_1 }}" />
+                                    @error('st_1')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -223,7 +224,7 @@
                                 <label class="col-sm-3 col-form-label">Bằng tiến sĩ chuyên ngành</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="st_2" class="form-control"
-                                        value="{{ $user->education->st_2 }}" />
+                                        value="{{ $user->afteredu->st_2 }}" />
                                     @error('st_2')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -236,7 +237,7 @@
                                 <label class="col-sm-3 col-form-label">Nơi đào tạo </label>
                                 <div class="col-sm-9">
                                     <input type="text" name="tp_1" class="form-control"
-                                        value="{{ $user->education->tp_1 }}" />
+                                        value="{{ $user->afteredu->tp_1 }}" />
                                     @error('tp_1')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -249,7 +250,7 @@
                                 <label class="col-sm-3 col-form-label">Nơi đào tạo</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="tp_2" class="form-control"
-                                        value="{{ $user->education->tp_2 }}" />
+                                        value="{{ $user->afteredu->tp_2 }}" />
                                     @error('tp_2')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -262,7 +263,7 @@
                                 <label class="col-sm-3 col-form-label">Năm cấp bằng</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="gy_1" class="form-control"
-                                        value="{{ $user->education->gy_1 }}" />
+                                        value="{{ $user->afteredu->gy_1 }}" />
                                     @error('gy_1')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -275,7 +276,7 @@
                                 <label class="col-sm-3 col-form-label">Năm cấp bằng</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="gy_2" class="form-control"
-                                        value="{{ $user->education->gy_2 }}" />
+                                        value="{{ $user->afteredu->gy_2 }}" />
                                     @error('gy_2')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -290,26 +291,42 @@
             <div class="card mt-5">
                 <div class="card-body">
                     <h4 class="card-title">Quá trình công tác</h4>
-                    @csrf
+
+                    @foreach($user->workprocess as $work)
+
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label"> Thời gian</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="time" class="form-control"
-                                        value="{{ $user->education->time }}" />
+                                        value="{{ $work->time }}" />
                                     @error('time')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Công việc </label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="job" class="form-control"
+                                           value="{{ $work->job }}" />
+                                    @error('job')
+                                    <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Nơi công tác</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="location" class="form-control"
-                                        value="{{ $user->education->location }}" />
+                                        value="{{ $work->location }}" />
                                     @error('location')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -317,23 +334,15 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Công việc </label>
-                                <div class="col-sm-9">
-                                    <input type="text" name="job" class="form-control"
-                                        value="{{ $user->education->job }}" />
-                                    @error('job')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary mr-2">Cập nhật</button>
-            <button type="button" onclick="window.location.href='{{ route('users.index') }}'"
-                class="btn btn-light">Hủy</button>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary mr-2">Cập nhật</button>
+                <button type="button" onclick="window.location.href='{{ route('users.index') }}'"
+                        class="btn btn-light">Hủy</button>
+            </div>
+        </div>
     </form>
 @endsection

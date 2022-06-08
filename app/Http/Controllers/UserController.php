@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Exports\UserExport;
+use App\Http\Requests\CreateUserRequest;
+use App\Models\User;
 use App\Repositories\Education\EducationRepository;
 use App\Repositories\Afteredu\AftereduRepository;
 use App\Repositories\WorkProcess\WorkProcessRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Excel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Repositories\Role\RoleRepositoryInterface;
@@ -62,17 +64,19 @@ class UserController extends Controller
 
     public function store(CreateUserRequest $request)
     {
-        $data = $request->except('_token');
+        $data = $request->only('email','phone','name','gender','birthday','address','role_id','department_id','is_admin');
         $data['password'] = Hash::make($request->password);
         $checkManager = $this->user->findManager($data['department_id']);
         if (isset($checkManager) && $data['role_id'] == config('const.ROLE_MANAGER')) {
             return redirect()->back()->with('error', 'Phòng này đã có trưởng khoa !');
         }
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = $image->getClientOriginalName();
             $image_resize = Image::make($image->getRealPath());
             $image_resize->resize(300, 300);
+            File::makeDirectory('images', $mode = 0777, true, true);
             $image_resize->save(public_path('images/' . $filename));
             $data['image'] = $filename;
             if (!empty($request->old_image)) {
@@ -81,16 +85,29 @@ class UserController extends Controller
         }
 
         $data['first_login'] = config('const.FIRSTLOGIN');
+        $user = User::create($data);
+
+        //edu
+        $data = $request->only('ts','tp','disciplines','gy');
+        $data['user_id'] = $user->id;
         $this->eduRepo->store($data);
-        $this->afteduRepo->store($date);
-        $this->work->store($date);
-        $this->user->store($data);
+
+        //after edu
+        $data = $request->only('st_1','tp_1','gy_1','st_2','tp_2','gy_2');
+        $data['user_id'] = $user->id;
+        $this->afteduRepo->store($data);
+
+        //after edu
+        $data = $request->only('time','location','job');
+        $data['user_id'] = $user->id;
+        $this->work->store($data);
+
         return redirect()->route('users.index')->with('success', 'Thêm mới thành công !');
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        if (Gate::allows(config('const.ROLE.ADMIN'))) {
+        if (Gate::allows(config('const.ROLE.ADMIN')) || $request->user()->id == $id) {
             $departments = $this->department->getAll();
             $roles = $this->role->getAll();
             $user = $this->user->getById($id);
@@ -105,7 +122,7 @@ class UserController extends Controller
         if (Auth::user()->id == $id && Auth::user()->role_id != $request->role_id) {
             return redirect()->route('users.edit', $id)->with('error', 'Không thể thay quyền của chính mình !');
         }
-        $data = $request->except('_token');
+        $data = $request->only('email','phone','name','gender','birthday','address','role_id','department_id','is_admin');
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = $image->getClientOriginalName();
@@ -117,14 +134,18 @@ class UserController extends Controller
                 Storage::delete('images/' . $request->old_image);
             }
         }
-        $this->user->update($data, $id);
+        $user = User::findOrFail($request->route('user'));
+        $user->update($data);
         $data = $request->only('ts', 'tp', 'disciplines', 'gy');
-        $this->eduRepo->update($data, $request->user()->education->id);
+        $this->eduRepo->update($data, $user->education->id);
         $data = $request->only('st_1', 'tp_1', 'gy_1', 'st_2', 'tp_2', 'gy_2');
-        $this->afteduRepo->update($data, $request->user()->afteredu->id);
-        $data = $request->only('time', 'location', 'job');
+        $this->afteduRepo->update($data, $user->afteredu->id);
 
-        return redirect()->route('users.index')->with('success', 'Cập nhật thành công !');
+        if (Gate::allows(config('const.ROLE.ADMIN'))) {
+            return redirect()->route('users.index')->with('success', 'Cập nhật thành công !');
+        }
+
+        return redirect()->route('profile')->with('success', 'Cập nhật thành công !');
     }
 
     public function destroy($id)

@@ -223,7 +223,7 @@
                                 <label class="col-sm-3 col-form-label"> Bằng thạc sĩ chuyên ngành</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="st_1" class="form-control" />
-                                    @error('st_!')
+                                    @error('st_1')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
