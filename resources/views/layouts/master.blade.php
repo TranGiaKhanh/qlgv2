@@ -29,7 +29,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
             integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
         <link rel="stylesheet" href="css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/custom.css">
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/sweetalert2.css') }}">
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
     @show
 </head>
 
@@ -88,6 +90,7 @@
         </script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="js/export.js"></script>
+        <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
     @show
 
 </body>

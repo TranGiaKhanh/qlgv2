@@ -19,7 +19,7 @@ class ScheduleImport implements ToModel, WithHeadingRow
             'id' => $row['id'],
             'class_id' => $row['class_id'],
             'date' => $row['date'],
-            'lesson' => $row['location'],
+            'location' => $row['location'],
             'time' => $row['time'],
             'value' => $row['value'],
             'teacher' => $row['teacher']

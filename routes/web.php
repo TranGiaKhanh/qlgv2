@@ -56,6 +56,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/import-schedule', 'ScheduleController@import')->name('schedules.import');
         Route::post('/import-schedule', 'ScheduleController@importSchedule')->name('schedules.importSchedule');
         route::get('/thoikhoabieu', 'ScheduleController@tkb')->name('schedules.tkb');
+        route::get('/list/delete_all', 'ScheduleController@destroyAll')->name('schedules.delete_all');
         //Route users
         Route::resource('users', 'UserController')->except(['index']);
         //Route profile
