@@ -28,7 +28,7 @@ class ClassesRepository extends BaseRepository implements ClassesRepositoryInter
         {
             $query = $query->where('name', 'like', '%' . $data['keyword'] . '%');
         }
-   
-        return $query->paginate(10);
+
+        return $query->paginate(50);
     }
 }

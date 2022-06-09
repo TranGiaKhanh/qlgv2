@@ -42,11 +42,11 @@
                 <table class="table table-striped" style="text-align:center">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th>Stt</th>
                             <th>Tên lớp</th>
                             <th>Khoa</th>
-                            <th>Create at</th>
-                            <th>Update at</th>
+                            <th>Ngày tạo</th>
+                            <th>Ngày cập nhật</th>
                             @can(config('const.ROLE.ADMIN'))
                             <th></th>
                             @endcan

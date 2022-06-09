@@ -14,16 +14,16 @@
                         {{ session()->get('success') }}
                     </h3>
                 @endif
-                <table class="table table-striped" style="text-align:center">
+                <table class="table table-hover" style="text-align:center">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Tên lớp</th>
-                            <th>Thời gian</th>
-                            <th>Địa điểm</th>
-                            <th>Buổi</th>
-                            <th>số tiết</th>
-                            <th>Giảng viên</th>
+                            <th scope="col">#</th>
+                            <th scope="col">Tên lớp</th>
+                            <th scope="col">Thời gian</th>
+                            <th scope="col">Địa điểm</th>
+                            <th scope="col">Buổi</th>
+                            <th scope="col">số tiết</th>
+                            <th scope="col">Giảng viên</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -17,12 +17,11 @@
                 <table class="table table-striped" style="text-align:center">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th>Stt</th>
                             <th>Tên khoa</th>
                             <th>Trạng thái</th>
                             <th>Trưởng khoa</th>
-                            <th>Create at</th>
-                            <th>Update at</th>
+                            <th>Ngày cập nhập</th>
                             @can(config('const.ROLE.ADMIN'))
                             <th></th>
                             @endcan
@@ -43,9 +42,6 @@
                                     </td>
                                     <td>
                                         {{ $department->manager }}
-                                    </td>
-                                    <td>
-                                        {{ $department->created_at->format("d/m/Y") }}
                                     </td>
                                     <td>
                                         {{ $department->updated_at->format("d/m/Y") }}

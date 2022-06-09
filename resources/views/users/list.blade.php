@@ -54,15 +54,16 @@
                         </form>
                     </li>
                 </ul>
-                <table class="table table-striped" style="text-align:center">
-                    <thead>
+                <table class="table table-hover " style="text-align:center">
+                    <thead class="thead-light">
                         <tr>
-                            <th>No</th>
-                            <th>Ảnh</th>
-                            <th>Họ và tên</th>
-                            <th>Email</th>
-                            <th>Khoa giảng dạy</th>
-                            <th>Chức vụ</th>
+                            <th scope="col">#</th>
+                            <th scope="col">Ảnh</th>
+                            <th scope="col">Họ và tên</th>
+                            <th scope="col">Số điện thoại</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Khoa giảng dạy</th>
+                            <th scope="col">Chức vụ</th>
                             @can(config('const.ROLE.ADMIN'))
                                 <th colspan="2"></th>
                             @endcan

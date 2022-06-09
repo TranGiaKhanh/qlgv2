@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputDepartmentmanager">Trưởng khoa </label>
-                        <input type="text" name="manager" class="form-control" value="{{ old('manager') }}">
+                        <input type="text" name="manager" class="form-control" value="{{$departments->manager }}">
                         @error('name')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror

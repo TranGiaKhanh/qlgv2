@@ -1,18 +1,18 @@
 @extends('layouts.master')
 @section('title')
-   Thời khóa biểu
+    Thời khóa biểu
 @endsection
 @section('content')
     <div class="col-lg-12 grid-margin stretch-card background-color-grey">
         <div class="card">
             <div class="card-body">
-                 <div class="form-group">
-                        <form method="post" action="{{route('schedules.importSchedule')}}" enctype="multipart/form-data">
-                            @csrf
-                            <input type="file" name="file">
-                            <button type="submit" class="btn btn-primary">Thêm mới</button>
-                        </form>
-                    </div>
+                <div class="form-group">
+                    <form method="post" action="{{ route('schedules.importSchedule') }}" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="file">
+                        <button type="submit" class="btn btn-primary">Thêm mới</button>
+                    </form>
+                </div>
                 <h4 class="card-title">Thời khóa biểu</h4>
                 <p class="card-description">
                 </p>
@@ -21,19 +21,20 @@
                         {{ session()->get('success') }}
                     </h3>
                 @endif
-                <table class="table table-striped" style="text-align:center">
+                <table class="table table-hover" style="text-align:center">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Tên lớp</th>
-                            <th>Thời gian</th>
-                            <th>Địa điểm</th>
-                            <th>Buổi</th>
-                            <th>số tiết</th>
-                            <th>Giảng viên</th>
-                            @can(config('const.ROLE.ADMIN'))
-                            <th>Action</th>
-                            @endcan
+                            <th scope="col">#</th>
+                            <th scope="col">Tên lớp</th>
+                            <th scope="col">Thời gian</th>
+                            <th scope="col">Địa điểm</th>
+                            <th scope="col">Buổi</th>
+                            <th scope="col">số tiết</th>
+                            <th scope="col">Giảng viên</th>
+                        </tr>
+                        @can(config('const.ROLE.ADMIN'))
+                            <th scope="col"></th>
+                        @endcan
                         </tr>
                     </thead>
                     <tbody>
@@ -50,10 +51,10 @@
                                         {{ $schedule->date }}
                                     </td>
                                     <td>
-                                        {{ $schedule->location}}
+                                        {{ $schedule->location }}
                                     </td>
                                     <td>
-                                        {{$schedule->time}}
+                                        {{ $schedule->time }}
                                     </td>
                                     <td>
                                         {{ $schedule->value }}
@@ -63,17 +64,16 @@
                                     </td>
                                     </td>
                                     @can(config('const.ROLE.ADMIN'))
-                                    <td>
-                                        <a class="btn btn-danger" href="#" data-toggle="modal"
-                                            data-target="#ModalDelete{{ $schedule->id }}">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </a>
-                                        <form id="delete_form_{{ $schedule->id }}" method="get"
-                                            action="{{ route('schedules.delete', $schedule->id) }}"
-                                            style="display:none">
-                                            @csrf
-                                        </form>
-                                    </td>
+                                        <td>
+                                            <a class="btn btn-danger" href="#" data-toggle="modal"
+                                                data-target="#ModalDelete{{ $schedule->id }}">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                            <form id="delete_form_{{ $schedule->id }}" method="get"
+                                                action="{{ route('schedules.delete', $schedule->id) }}" style="display:none">
+                                                @csrf
+                                            </form>
+                                        </td>
                                     @endcan
                                     @include('modals.delete-schedules')
                                 </tr>

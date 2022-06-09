@@ -56,6 +56,9 @@ class UserController extends Controller
         if (Gate::allows(config('const.ROLE.ADMIN'))) {
             $departments = $this->department->getAll();
             $roles = $this->role->getAll();
+            $workproces = [
+                []
+            ];
             return view('users.create', compact('departments', 'roles'));
         } else {
             abort(403);
