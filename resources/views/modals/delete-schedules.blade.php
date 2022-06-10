@@ -9,7 +9,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">Bạn có muốn xóa lớp <b>{{ $schedule->name }}</b>  ?</div>
+                <div class="modal-body">Bạn có muốn xóa <b>{{ $schedule->name }}</b>  ?</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">
                         {{ __('Cancel') }}

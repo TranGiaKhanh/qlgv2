@@ -94,10 +94,10 @@
                                             data-target="#modal-delete{{ $user->id }}">
                                             <i class="ti-trash text-white" aria-hidden="true"></i>
                                         </a>
-                                        {{-- <a class="btn btn-danger" href="#" data-toggle="modal"
+                                        <a class="btn btn-danger" href="#" data-toggle="modal"
                                             data-target="#modal-reset{{ $user->id }}">
                                             <i class="ti-reload text-white" aria-hidden="true"></i>
-                                        </a> --}}
+                                        </a>
                                         <form id="delete_form_{{ $user->id }}" method="post"
                                             action="{{ route('users.destroy', $user->id) }}" style="display:none">
                                             @method('DELETE')

@@ -53,13 +53,13 @@ class ScheduleController extends Controller
         ]);
 
         Excel::import(new ScheduleImport, $request->file('file'));
-        return redirect()->route('schedules.index')->with('success');
+        return redirect()->route('schedules.index')->with('success','Thêm thành công');
     }
 
     public function destroy($id)
     {
         $this->schedule->destroy($id);
-        return redirect()->route('schedules.index')->with('success');
+        return redirect()->route('schedules.index')->with('success', 'Xóa thành công');
     }
 
     public function destroyAll()

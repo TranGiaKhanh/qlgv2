@@ -29,6 +29,6 @@ class MailNotify extends Mailable
      */
     public function build()
     {
-        return $this->from('khongmanhhung201@gmail.com')->view('mail.mail')->subject('Reset Password');
+        return $this->from('khanhtg1720@gmail.com')->view('mail.mail')->subject('Đặt mật khẩu về mặc định');
     }
 }
