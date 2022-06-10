@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Danh sach giảng viên')
+@section('title', 'Danh sách giảng viên')
 @section('content')
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">

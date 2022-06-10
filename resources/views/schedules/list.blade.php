@@ -114,7 +114,7 @@
                         'success'
                     )
 
-                    window.location = '{{ route('schedules.delete_all') }}'
+                    window.location = '{{ route('schedules.delete_al') }}'
                 }
             })
         })

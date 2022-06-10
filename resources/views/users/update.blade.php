@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'CHỉnh sửa thông tin')
+@section('title', 'Chỉnh sửa thông tin')
 @section('content')
     @if (session()->has('error'))
         <h6 class="alert alert-danger">
@@ -96,6 +96,8 @@
                             </div>
                         </div>
 
+
+                        @can(config('const.ROLE.ADMIN'))
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Khoa <span class="text-danger">*</span></label>
@@ -114,7 +116,8 @@
                                 </div>
                             </div>
                         </div>
-
+                        @endcan
+                        @can(config('const.ROLE.ADMIN'))
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Chức vụ<span class="text-danger">*</span></label>
@@ -128,6 +131,18 @@
                                         @endforeach
                                     </select>
                                     @error('role_id')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        @endcan
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Ảnh </label>
+                                <div class="col-sm-9">
+                                    <input type="file" name="image">
+                                    @error('image')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -209,7 +224,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Bằng thạc sĩ chuyên ngành</label>
+                                <label class="col-sm-3 col-form-label">Ths chuyên ngành</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="st_1" class="form-control"
                                         value="{{ $user->afteredu->st_1 }}" />
@@ -221,7 +236,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Bằng tiến sĩ chuyên ngành</label>
+                                <label class="col-sm-3 col-form-label">Ts chuyên ngành</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="st_2" class="form-control"
                                         value="{{ $user->afteredu->st_2 }}" />

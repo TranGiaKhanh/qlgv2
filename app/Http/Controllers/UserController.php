@@ -122,9 +122,9 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, $id)
     {
-        if (Auth::user()->id == $id && Auth::user()->role_id != $request->role_id) {
-            return redirect()->route('users.edit', $id)->with('error', 'Không thể thay quyền của chính mình !');
-        }
+        // if (Auth::user()->id == $id && Auth::user()->role_id != $request->role_id) {
+        //     return redirect()->route('users.edit', $id)->with('error', 'Không thể thay quyền của chính mình !');
+        // }
         $data = $request->only('email','phone','name','gender','birthday','address','role_id','department_id','is_admin');
         if ($request->hasFile('image')) {
             $image = $request->file('image');
